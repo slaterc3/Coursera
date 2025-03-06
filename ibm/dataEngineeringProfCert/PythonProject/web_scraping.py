@@ -11,7 +11,7 @@ csv_path = '/home/project/top_50_films.csv'
 df = pd.DataFrame(columns=['Average Rank','Film', 'Year'])
 count = 0
 
-html_page = requests.get(url)
+html_page = requests.get(url).text # .text solved issue (BS expects string)
 data = BeautifulSoup(html_page, 'html.parser')
 
 tables = data.find_all('tbody')
