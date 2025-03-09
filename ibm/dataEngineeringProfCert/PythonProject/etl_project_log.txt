@@ -1,0 +1,7 @@
+2025-Mar-09-17:30:30 : Initiating ETL processes
+2025-Mar-09-17:30:30 : Extracting data...
+2025-Mar-09-17:30:35 : Transforming data...
+2025-Mar-09-17:30:35 : loading data to csv: Countries_by_GDP.csv
+2025-Mar-09-17:30:35 : querying Countries_by_GDP:
+"SELECT * from Countries_by_GDP WHERE GDP_USD_billions >= 100"
+2025-Mar-09-17:30:35 : ETL processes completed
