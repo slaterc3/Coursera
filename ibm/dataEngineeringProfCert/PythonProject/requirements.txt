@@ -1,0 +1,7 @@
+# requests
+bs4
+pandas 
+# sqlite3
+numpy
+# datetim
+wget

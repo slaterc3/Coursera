@@ -23,7 +23,6 @@ table_name = 'Largest_banks'
 
 log_file = 'code_log.txt'
 
-conn = sqlite3.connect(db_name)
 
 def log_progress(log_point):
     timestamp_fmt = '%Y-%h-%d-%H:%M:%S'
@@ -77,23 +76,18 @@ def load_to_csv(df, output_path):
 def load_to_db(df, sql_connection, table_name):
     ''' This function saves the final data frame to a database
     table with the provided name. Function returns nothing.'''
+    df.to_sql(table_name, sql_connection, if_exists='replace',index=False)
 
 def run_query(query_statement, sql_connection):
-    ''' This function runs the query on the database table and
+    """''' This function runs the query on the database table and
     prints the output on the terminal. Function returns nothing. '''
 ''' Here, you define the required entities and call the relevant
 functions in the correct order to complete the project. Note that this
-portion is not inside any function.'''
+portion is not inside any function.'''"""
+    print(query_statement)
+    query_output = pd.read_sql(query_statement, sql_connection)
+    print(query_output)
 
-"""Task	Log message on completion
-Declaring known values	Preliminaries complete. Initiating ETL process
-Call extract() function	Data extraction complete. Initiating Transformation process
-Call transform() function	Data transformation complete. Initiating Loading process
-Call load_to_csv()	Data saved to CSV file
-Initiate SQLite3 connection	SQL Connection initiated
-Call load_to_db()	Data loaded to Database as a table, Executing queries
-Call run_query()	Process Complete
-Close SQLite3 connection	Server Connection closed"""
 
 if __name__ == '__main__':
     log_progress("Preliminaries complete. Initiating ETL process")
@@ -108,3 +102,17 @@ if __name__ == '__main__':
     print(df['MC_EUR_Billion'][4])
     load_to_csv(df2, output_path)
     log_progress('Data saved to CSV file')
+    conn = sqlite3.connect(db_name)
+    log_progress('SQL Connection initiated')
+    load_to_db(df2, conn, table_name)
+    log_progress('Data loaded to Database as a table, Executing queries')
+    # log_progress('')
+    sql_stmt1 = 'SELECT * FROM Largest_banks'
+    sql_stmt2 = 'SELECT AVG(MC_GBP_Billion) FROM Largest_banks'
+    sql_stmt3 = 'SELECT Name from Largest_banks LIMIT 5'
+    run_query(sql_stmt1, conn)
+    run_query(sql_stmt2, conn)
+    run_query(sql_stmt3, conn)
+    log_progress('Process Complete')
+    conn.close()
+    log_progress('Server Connection Closed')

@@ -1,0 +1,57 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# SQLite database files
+*.sqlite3
+*.db
+
+# C extensions
+*.so
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+env/
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VS Code settings
+.vscode/
+
+# Pytest cache
+.pytest_cache/
+
+# MyPy, coverage, and other tool caches
+.mypy_cache/
+.coverage
+htmlcov/
+.cache/
+
+# Logs and local data
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+
+# Exported or large data files
+*.csv
+*.tsv
+*.xlsx
+*.parquet
+*.feather
+*.h5
+
+# Environment variable / secret files
+.env
+.env.*
+
+# Compiled notebooks
+*.nbconvert.ipynb
