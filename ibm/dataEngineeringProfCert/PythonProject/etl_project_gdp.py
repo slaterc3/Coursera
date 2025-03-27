@@ -48,7 +48,7 @@ def extract(url, table_attribs):
         if not first_cell.find('a'):
             continue
         country = first_cell.get_text(strip=True)
-        # print(first_cell)
+        
         if len(cells) < 3:
             continue
         third_cell = cells[2].get_text(strip=True)
