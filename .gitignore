@@ -1,0 +1,48 @@
+# Python
+# Bytecode files
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+
+# Virtual environment
+# You might use venv, .venv, env, or something else.
+# Add any directories where your virtual environment is stored.
+venv/
+.venv/
+env/
+
+# Flask specific (example database file)
+# If you are using SQLAlchemy with a file-based DB (like SQLite)
+# and don't want to commit the actual DB file.
+# Adjust the filename if yours is different.
+app.db
+*.sqlite
+*.sqlite3
+
+# Sensitive configuration files
+# Be cautious ignoring config files. It's often better to use
+# environment variables or ignore only local/sensitive versions,
+# not the base configuration template.
+# Example: a file named `config_local.py` or a .env file
+config*.py  # Potentially too broad, use with care and adjust
+.env
+*.env
+
+# IDE and editor files
+# Ignore project/workspace files from your IDE or editor
+.idea/          # JetBrains (PyCharm, etc.)
+.vscode/        # VS Code (Optional - sometimes contains useful launch configs.
+                # Consider if you want to commit specific debug settings)
+*.sublime-project
+*.sublime-workspace
+
+# Operating System files
+.DS_Store       # macOS
+Thumbs.db       # Windows
+
+# Logs
+*.log
+
+# Any compiled/built static assets if you're using a build step
+# /static/dist/ # Example if you compile frontend code into this folder
