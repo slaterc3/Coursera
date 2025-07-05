@@ -152,3 +152,16 @@ def delete_by_uuid(id):
             return {"message": f"Person with ID {id} deleted"}, 200
     # If no matching person is found, return a JSON response with a message and a 404 Not Found status code
     return {"message": "person not found"}, 404
+
+@app.route("/person", methods=['POST'])
+def add_by_uuid():
+    new_person = request.json
+    if not new_person:
+        return {"message": "Invalid input parameter"}, 422
+    # code to validate new_person ommited
+    try:
+        data.append(new_person)
+    except NameError:
+        return {"message": "data not defined"}, 500
+
+    return {"message": f"{new_person['id']}"}, 200
