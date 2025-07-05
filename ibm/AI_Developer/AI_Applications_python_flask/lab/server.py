@@ -1,5 +1,5 @@
 # Import the Flask class from the flask module
-from flask import Flask, make_response
+from flask import Flask, make_response, request 
 
 data = [
     {
@@ -97,3 +97,58 @@ def get_data():
         # Handle the case where 'data' is not defined
         # Return a JSON response with a 404 Not Found status code
         return {"message": "Data not found"}, 404
+
+@app.route("/name_search")
+def name_search():
+
+    query = request.args.get('q')
+
+    if query is None:
+        return {"message": "Query parameter 'q' is missing"}, 400
+    
+    if query.strip() == "" or query.isdigit():
+        return {"message": "Invalid input parameter"}, 422
+    
+    for person in data:
+        if query.lower() in person["first_name"].lower():
+            return person, 200 
+    
+    # no match
+    return {"message": "Person not found"}, 404
+
+## test with: 
+# curl -X GET -i -w '\n' "localhost:5000/name_search?q=Abdel"
+
+@app.route("/count")
+def count():
+    try:
+        # Attempt to return the count of items in 'data' as a JSON response
+        return {"data count": len(data)}, 200
+    except NameError:
+        # Handle the case where 'data' is not defined
+        # Return a JSON response with a message and a 500 Internal Server Error status code
+        return {"message": "data not defined"}, 500
+
+@app.route("/person/<uuid:id>")
+def find_by_uuid(id):
+    # Iterate through the 'data' list to search for a person with a matching ID
+    for person in data:
+        # Check if the 'id' field of the person matches the 'id' parameter
+        if person["id"] == str(id):
+            # Return the matching person as a JSON response with a 200 OK status code
+            return person
+    # If no matching person is found, return a JSON response with a message and a 404 Not Found status code
+    return {"message": "person not found"}, 404
+
+@app.route("/person/<uuid:id>", methods=['DELETE'])
+def delete_by_uuid(id):
+    # Iterate through the 'data' list to search for a person with a matching ID
+    for person in data:
+        # Check if the 'id' field of the person matches the 'id' parameter
+        if person["id"] == str(id):
+            # Remove the person from the 'data' list
+            data.remove(person)
+            # Return a JSON response with a message confirming deletion and a 200 OK status code
+            return {"message": f"Person with ID {id} deleted"}, 200
+    # If no matching person is found, return a JSON response with a message and a 404 Not Found status code
+    return {"message": "person not found"}, 404
