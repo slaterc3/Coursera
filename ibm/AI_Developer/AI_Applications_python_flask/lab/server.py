@@ -165,3 +165,9 @@ def add_by_uuid():
         return {"message": "data not defined"}, 500
 
     return {"message": f"{new_person['id']}"}, 200
+
+@app.errorhandler(404)
+def api_not_found(error):
+    # This function is a custom error handler for 404 Not Found errors
+    # It is triggered whenever a 404 error occurs within the Flask application
+    return {"message": "API not found"}, 404
